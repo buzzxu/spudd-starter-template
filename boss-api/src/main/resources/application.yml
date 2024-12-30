@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: boss-api
+  profiles:
+    active: devel
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 2000MB
+      max-request-size: 2000MB
+  aop:
+    proxy-target-class: true
+    devtools:
+      restart:
+        enabled: true
+  web:
+    resources:
+      static-locations: classpath:/static/
+  main:
+    allow-circular-references: true
+    allow-bean-definition-overriding: true
+
+server:
+  port: 8090
+  servlet:
+    context-path: /
+  undertow:
+    direct-buffers: true
+    buffer-size: 16364
+    threads:
+      io: 8
+      worker: 256
+
+shiro:
+  filterMapping: /login:anon,/captcha:anon,/open/**:anon
+
+
+logging:
+  config: classpath:log4j2/log4j2-${spring.profiles.active}.xml

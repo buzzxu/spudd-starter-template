@@ -1,0 +1,24 @@
+### MGR 验证码
+GET {{host_boss}}/captcha
+Content-Type: application/json
+
+> {%
+    client.log("验证码获取成功 保存key")
+    client.global.set("boss-captcha-key",response.body.data.key)
+%}
+
+### MGR 登录
+POST {{host_boss}}/login
+Content-Type: application/json
+
+{
+
+  "userName" : "admini",
+  "password": "111111",
+  "key": "{{boss-captcha-key}}",
+  "valiCode": "7074"
+}
+> {%
+    client.log("登录成功 保存token")
+    client.global.set("token-boss",response.body.data.token)
+%}

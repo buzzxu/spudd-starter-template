@@ -1,0 +1,22 @@
+jwt:
+  iss: localhost
+  expiration: 7
+  region: 0
+
+
+redis:
+  url: 47.100.7.136:10379
+  password: MNBV7QCvX9YX&UK8xu
+  database: 14
+  pool:
+    min-idle: 500
+    max-idle: 2000
+    max-total: 2000
+    max-wait: 5000
+
+db:
+  connection:
+    url: jdbc:postgresql://pgm-uf6713x8gfi411gdio.pg.rds.aliyuncs.com:5432/jt
+    driver-class-name: org.postgresql.Driver
+    username: jt_devel
+    password: Mn2996Pgd1YgqsPNNAXu
