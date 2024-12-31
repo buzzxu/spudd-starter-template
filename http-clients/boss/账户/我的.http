@@ -3,12 +3,29 @@ GET {{host_boss}}/user/menus
 Authorization: {{token-boss}}
 
 
+### 我的信息
+GET {{host_boss}}/user/info
+Authorization: {{token-boss}}
+
+### 修改信息
+POST {{host_boss}}/user/edit
+Authorization: {{token-boss}}
+Content-Type: application/json
+
+{
+  "mobile": "15333819906",
+  "realName": "管理员"
+}
+
 ### 修改密码
 POST {{host_boss}}/user/password/change
 Authorization: {{token-boss}}
 Content-Type: application/json
 
 {
-  "oldPassword": "111111",
-  "newPassword": "111112"
+  "oldPassword": "111112",
+  "newPassword": "111111"
 }
+> {%
+    client.global.set("token-boss",response.body.data)
+%}

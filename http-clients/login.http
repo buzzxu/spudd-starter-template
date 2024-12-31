@@ -14,9 +14,9 @@ Content-Type: application/json
 {
 
   "userName" : "admini",
-  "password": "111111",
+  "password": "111112",
   "key": "{{boss-captcha-key}}",
-  "valiCode": "1805"
+  "valiCode": "7117"
 }
 > {%
     client.log("登录成功 保存token")

@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 public class SysUserInfoResponse {
 
     private Long id;
+    private String avatar;
     private String userName;
     private String mobile;
     private String email;

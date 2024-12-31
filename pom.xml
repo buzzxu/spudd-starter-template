@@ -10,7 +10,6 @@
     <packaging>pom</packaging>
     <modules>
         <module>boss-api</module>
-        <module>components</module>
         <module>spuddy-services</module>
         <module>spuddy-objects</module>
     </modules>

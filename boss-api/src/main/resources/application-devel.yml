@@ -18,5 +18,5 @@ db:
   connection:
     url: jdbc:postgresql://pgm-uf6713x8gfi411gdio.pg.rds.aliyuncs.com:5432/jt
     driver-class-name: org.postgresql.Driver
-    username: jt_devel
+    username: jd_devel
     password: Mn2996Pgd1YgqsPNNAXu

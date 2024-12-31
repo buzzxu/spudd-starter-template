@@ -47,8 +47,8 @@ public class SysUserService {
         checkArgument(!Strings.isNullOrEmpty(userInfo.getUserName()),"缺少参数: 用户名");
         try {
             if(userInfo.getId() != null && userInfo.getId() > 0){
+                log.info("修改账户,{},操作人:{}",userInfo.getUserName(),operator.name());
                 //修改
-
                 if(userService.editUser(userInfo)){
                     List<Integer> roleIds = roleService.roleIdByUserId(userInfo.getId());
                     if((userInfo.getRoleId() > 0) && (roleIds.isEmpty() || !roleIds.contains(userInfo.getRoleId()))){
@@ -58,6 +58,7 @@ public class SysUserService {
                 }
                 return false;
             }else{
+                log.info("创建账户,{},操作人:{}",userInfo.getUserName(),operator.name());
                 userInfo.setStatus(1); //默认正常
                 userInfo.setPassword(pwd); //默认密码
                 userService.create(userInfo,user->{
@@ -74,7 +75,7 @@ public class SysUserService {
     public boolean reopen(Long userId, Operator operator){
         checkArgument(userId != null && userId > 0, "缺少参数:用户ID");
         checkArgument(Objects.equals(userId,operator.getId()),"无法操作自己的账户");
-        log.info("删除用户,{},操作人: {}",userId,operator.name());
+        log.info("禁用|恢复用户,{},操作人: {}",userId,operator.name());
         try {
             return userService.isDisable(userId) ? userService.normal(userId,id->true) : userService.disable(userId,id->true);
         }finally {

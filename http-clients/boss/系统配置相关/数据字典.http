@@ -1,0 +1,24 @@
+##列表分页
+GET {{host_boss}}/datadict/list/10/1?key=&name=
+Authorization: {{token-boss}}
+
+
+### 新增
+POST {{host_boss}}/datadict/create
+Authorization: {{token-boss}}
+Content-Type: application/json
+
+{
+  "key": "type",
+  "name": "类型1",
+  "value": "ttt"
+}
+
+### 根据关键词获取
+GET {{host_boss}}/datadict/list/type
+Authorization: {{token-boss}}
+
+
+### 删除
+DELETE {{host_boss}}/datadict/1
+Authorization: {{token-boss}}
