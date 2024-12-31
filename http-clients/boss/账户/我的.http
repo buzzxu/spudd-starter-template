@@ -1,0 +1,14 @@
+### 我的菜单
+GET {{host_boss}}/user/menus
+Authorization: {{token-boss}}
+
+
+### 修改密码
+POST {{host_boss}}/user/password/change
+Authorization: {{token-boss}}
+Content-Type: application/json
+
+{
+  "oldPassword": "111111",
+  "newPassword": "111112"
+}

@@ -47,23 +47,23 @@ public class RoleController {
             , @PathVariable("pageNumber") int pageNumber) {
         return R.of(roleService.paginate(pageNumber, pageSize, null));
     }
-    @PostMapping("/save")
-    public R<Boolean> save(@RequestBody SaveOrUpdateRoleRequest request) {
+    @PostMapping("/saveOrUpdate")
+    public R<Boolean> saveOrUpdate(@RequestBody SaveOrUpdateRoleRequest request) {
         checkArgument(!Strings.isNullOrEmpty(request.getName()), "请设置角色名称");
-        checkArgument(!Strings.isNullOrEmpty(request.getName()), "请设置角色编码");
+        checkArgument(!Strings.isNullOrEmpty(request.getCode()), "请设置角色编码");
         BossUserInfo user = GetUser.of();
-        return R.of(roleMenuService.create(Role.builder().name(request.getName()).code(request.getCode()).type(request.getType()).description(request.getDescription()).build(), request.getMenuIds(), null, user.of()) > 0);
+        return R.of(roleMenuService.create(Role.builder().id(request.getId()).name(request.getName()).code(request.getCode()).type(request.getType()).description(request.getDescription()).build(), request.getMenuIds(), null, user.of()) > 0);
     }
 
-
-    @PostMapping("/create")
-    public R<Integer> create( @RequestBody SaveOrUpdateRoleRequest param){
-        return R.of(roleService.create(param.getName(),param.getCode()));
-    }
 
     @DeleteMapping("/{roleId}")
     public R<Boolean> delete(@PathVariable("roleId") int roleId){
         roleService.delete(roleId,null);
         return R.of(true);
+    }
+
+    @GetMapping("/selector")
+    public R<List<Pair<Integer,String>>> selections(){
+        return R.of(roleService.getOptions());
     }
 }

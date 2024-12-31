@@ -3,7 +3,6 @@ package io.github.buzzxu.spuddy.controllers.system;
 import io.github.buzzxu.spuddy.controllers.system.requests.CreateOrUpdateSysteUserRequest;
 import io.github.buzzxu.spuddy.controllers.system.responses.SysUserInfoResponse;
 import io.github.buzzxu.spuddy.security.objects.BossUserInfo;
-import io.github.buzzxu.spuddy.security.objects.UserInfo;
 import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
@@ -15,8 +14,8 @@ import org.mapstruct.factory.Mappers;
         , unmappedTargetPolicy = ReportingPolicy.IGNORE
         , nullValueMappingStrategy = NullValueMappingStrategy.RETURN_NULL
         , nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-public interface VoMapStructs {
-    VoMapStructs INSTANCE = Mappers.getMapper(VoMapStructs.class);
+public interface SysVoMapStructs {
+    SysVoMapStructs INSTANCE = Mappers.getMapper(SysVoMapStructs.class);
 
 
     @Mapping(target = "id",source = "id")

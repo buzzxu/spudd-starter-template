@@ -1,0 +1,31 @@
+### 用户列表
+GET {{host_boss}}/sys/users/list/10/1?keywords=&roleId=&status=
+Authorization: {{token-boss}}
+
+
+
+### 创建用户
+POST {{host_boss}}/sys/users/saveOrUpdate
+Authorization: {{token-boss}}
+Content-Type: application/json
+
+{
+  "id": 6,
+  "userName": "test2",
+  "mobile": "15333819907",
+  "realName": "张某人",
+  "roleId":6
+}
+
+### 删除账户
+DELETE {{host_boss}}/sys/users/5
+Authorization: {{token-boss}}
+
+### 禁用|或开启
+PUT {{host_boss}}/sys/users/reopen/5
+Authorization: {{token-boss}}
+
+
+### 重置密码
+PUT {{host_boss}}/sys/users/password/reset/6
+Authorization: {{token-boss}}

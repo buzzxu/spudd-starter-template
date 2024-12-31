@@ -1,5 +1,26 @@
 
+### 角色选择器
+GET {{host_boss}}/sys/role/selector
+Authorization: {{token-boss}}
 
 ### 角色列表
 GET {{host_boss}}/sys/role/list/10/1
-Authorization:
+Authorization: {{token-boss}}
+
+
+### 创建或修改角色
+POST {{host_boss}}/sys/role/saveOrUpdate
+Authorization: {{token-boss}}
+Content-Type: application/json
+
+{
+  "id": 6,
+  "name": "测试角色2",
+  "code": "test2",
+  "remark": "这是备注",
+  "menuIds": [4]
+}
+
+### 删除角色
+DELETE {{host_boss}}/sys/role/3
+Authorization: {{token-boss}}

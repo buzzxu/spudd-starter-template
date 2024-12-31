@@ -12,7 +12,6 @@ import io.github.buzzxu.spuddy.services.boss.SysUserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -26,7 +25,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/system/users",produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping( "/sys/users")
 @RequiresRoles(value = {"superman"}, logical = Logical.OR)
 public class SystemUserController {
 
@@ -45,7 +44,7 @@ public class SystemUserController {
             }
         });
         status.ifPresent(v->{
-            if(v>0){
+            if(v>=0){
                 params.put("status", v);
             }
         });
@@ -54,31 +53,33 @@ public class SystemUserController {
                 params.put("roleId", v);
             }
         });
-        return R.of(systemUserService.list(pageNumber,pageSize,params).convert(VoMapStructs.INSTANCE::to));
+        return R.of(systemUserService.list(pageNumber,pageSize,params).convert(SysVoMapStructs.INSTANCE::to));
     }
 
-    @PostMapping("/create")
-    public R<Boolean> createSystemUser(@RequestBody CreateOrUpdateSysteUserRequest request){
+    @PostMapping("/saveOrUpdate")
+    public R<Boolean> saveOrUpdate(@RequestBody CreateOrUpdateSysteUserRequest request){
         checkArgument(!Strings.isNullOrEmpty(request.getRealName()),"请填写真实姓名");
-        checkArgument(request.getRoleId() !=0,"请设置角色");
+        checkArgument(request.getRoleId() >0,"请设置角色");
         BossUserInfo user = GetUser.of();
-        BossUserInfo userInfo = VoMapStructs.INSTANCE.to(request);
+        BossUserInfo userInfo = SysVoMapStructs.INSTANCE.to(request);
         return R.of(systemUserService.saveOrderUpdate(userInfo,user.of()));
     }
 
 
 
     @DeleteMapping("/{userId:\\d+}")
-    public R<Boolean> deleteSysUser(@PathVariable("userId") long userId){
+    public R<Boolean> delete(@PathVariable("userId") long userId){
         checkArgument(userId>0,"用户ID不能为空");
         BossUserInfo user = GetUser.of();
         return R.of(systemUserService.delete(userId,user.of()));
     }
 
 
-
-
-
+    @PutMapping("/reopen/{userId:\\d+}")
+    public R<Boolean> reopen(@PathVariable("userId") Long userId){
+        BossUserInfo user = GetUser.of();
+        return R.of(systemUserService.reopen(userId,user.of()));
+    }
 
     @PutMapping("/password/reset/{userId:\\d+}")
     public R<Boolean> passwordReset(@PathVariable("userId") Long userId){

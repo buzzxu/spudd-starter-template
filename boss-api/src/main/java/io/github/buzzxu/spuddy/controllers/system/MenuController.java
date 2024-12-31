@@ -2,6 +2,7 @@ package io.github.buzzxu.spuddy.controllers.system;
 
 import com.google.common.collect.Sets;
 import io.github.buzzxu.spuddy.R;
+import io.github.buzzxu.spuddy.controllers.requests.IdsRequest;
 import io.github.buzzxu.spuddy.objects.Pager;
 import io.github.buzzxu.spuddy.security.MenuService;
 import io.github.buzzxu.spuddy.security.objects.Menu;
@@ -56,14 +57,14 @@ public class MenuController {
 
 
     @DeleteMapping("/{id}")
-    public R<Boolean> delete(@PathVariable int id){
+    public R<Boolean> delete(@PathVariable("id") int id){
         return R.of(menuService.delete(null,id));
     }
 
 
     @PutMapping("/role/{roleId}")
-    public R<Boolean> menu2Role(@PathVariable("roleId")int roleId, @RequestParam("menuId")Set<Integer> menuIds){
-        return R.of(menuService.menu2Role(roleId,menuIds,null));
+    public R<Boolean> menu2Role(@PathVariable("roleId")int roleId, @RequestBody IdsRequest request){
+        return R.of(menuService.menu2Role(roleId,request.getIds(),null));
     }
 
     /**

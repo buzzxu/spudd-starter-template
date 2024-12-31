@@ -1,7 +1,11 @@
 package io.github.buzzxu.spuddy.controllers.system.responses;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.google.common.base.Strings;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 /**
  * @author xux
@@ -18,8 +22,18 @@ public class SysUserInfoResponse {
     private String roleName;
     private String realName;
     private Integer status;
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm"
+    )
+    protected LocalDateTime createdAt;
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm"
+    )
+    protected LocalDateTime updatedAt;
 
-
+    public String getUserName() {
+        return Strings.isNullOrEmpty(userName) ? mobile : userName;
+    }
 
 
     public String getStatusText(){

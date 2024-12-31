@@ -12,7 +12,6 @@ import java.util.Set;
 @Setter
 public class SaveOrUpdateRoleRequest {
     private int id;
-    private Integer roleId;
     private String name;
     private String code;
     private RoleType type;

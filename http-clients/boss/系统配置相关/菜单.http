@@ -1,0 +1,55 @@
+### 菜单列表
+GET {{host_boss}}/sys/menu/list/10/1
+Authorization: {{token-boss}}
+
+### 树形菜单
+GET {{host_boss}}/sys/menu/all/tree
+Authorization: {{token-boss}}
+
+
+### 设置角色的菜单
+PUT {{host_boss}}sys/menu/role/1
+
+
+### 根据角色ID获取菜单id
+GET {{host_boss}}/sys/menu/role/1/ids
+Authorization: {{token-boss}}
+
+### 新建菜单 - 系统设置
+POST {{host_boss}}/sys/menu/saveOrUpdate
+Authorization: {{token-boss}}
+Content-Type: application/json
+
+{
+  "id": 1,
+  "parentId": 0,
+  "name": "系统设置",
+  "code": "sys-setting",
+  "path": "sys-setting",
+  "icon": "tabler:align-box-center-stretc",
+  "remark": "备注",
+  "enable": true,
+  "sort": 100
+}
+### 新建菜单 - 系统设置-菜单管理
+POST {{host_boss}}/sys/menu/saveOrUpdate
+Authorization: {{token-boss}}
+Content-Type: application/json
+
+{
+  "parentId": 0,
+  "name": "菜单管理",
+  "code": "menu-manage",
+  "path": "sys-setting/menu-manage",
+  "icon": "tabler:align-box-center-stretc",
+  "remark": "菜单维护",
+  "enable": true,
+  "sort": 100
+}
+
+
+### 删除菜单
+DELETE {{host_boss}}/sys/menu/3
+Authorization: {{token-boss}}
+
+
