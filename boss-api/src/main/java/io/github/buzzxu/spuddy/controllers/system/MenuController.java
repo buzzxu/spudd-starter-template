@@ -63,8 +63,8 @@ public class MenuController {
 
 
     @PutMapping("/role/{roleId}")
-    public R<Boolean> menu2Role(@PathVariable("roleId")int roleId, @RequestBody IdsRequest request){
-        return R.of(menuService.menu2Role(roleId,request.getIds(),null));
+    public R<Boolean> menu2Role(@PathVariable("roleId")int roleId, @RequestParam("menuId")Set<Integer> menuIds){
+        return R.of(menuService.menu2Role(roleId,menuIds,null));
     }
 
     /**
